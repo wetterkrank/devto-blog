@@ -1,3 +1,5 @@
+import { GetStaticProps } from 'next'
+
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import Link from 'next/link'
@@ -7,7 +9,8 @@ import { getSortedPostsData } from '../lib/posts'
 import utilStyles from '../styles/utils.module.css'
 
 
-export async function getStaticProps() {
+
+export const getStaticProps: GetStaticProps = async context => {
   const allPostsData = await getSortedPostsData()
   return {
     props: {
@@ -23,7 +26,7 @@ export default function Home({ allPostsData }) {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>Hi! I'm Alex Antsiferov.</p>
+        <p>Hi! My name is Alex Antsiferov.</p>
         <p>
           I'm a web developer living in Berlin, Germany. This is a mirror of my <a href="https://dev.to/wetterkrank">dev.to blog</a>.
         </p>

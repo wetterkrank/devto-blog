@@ -1,13 +1,18 @@
 import remark from 'remark'
 import html from 'remark-html'
 
-
 export async function getSortedPostsData() {
+  type PostData = {
+    id: number
+    created_at: string
+    title: string
+  }
+
   const url = 'https://dev.to/api/articles?username=wetterkrank'
   const res = await fetch(url)
   const data = await res.json()
   
-  const allPostsData = Object.values(data).map(item => {
+  const allPostsData = Object.values(data).map((item: PostData) => {
     const id = item.id
     const date = item.created_at
     const title = item.title
