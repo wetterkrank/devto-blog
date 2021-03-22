@@ -26,18 +26,18 @@ export default function Home({ allPostsData }) {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>Hi! My name is Alex Antsiferov.</p>
+        <p>Hi! My name is Alex Antsiferov. I'm a web developer living in Berlin, Germany.</p>
         <p>
-          I'm a web developer living in Berlin, Germany. This is a mirror of my <a href="https://dev.to/wetterkrank">dev.to blog</a>.
+          This is a mirror of my <a href="https://dev.to/wetterkrank">dev.to blog</a>.
         </p>
       </section>
 
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <h2 className={utilStyles.headingLg}>Posts</h2>
         <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>
+          {allPostsData.map(({ slug, date, title }) => (
+            <li className={utilStyles.listItem} key={slug}>
+              <Link href={`/posts/${slug}`}>
                 <a>{title}</a>
               </Link>
               <br />
