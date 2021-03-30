@@ -1,2 +1,6 @@
 ## An excercise in Next.js
 Following the [Next.js tutorial](https://nextjs.org/learn/basics/create-nextjs-app) to implement a mirror of the dev.to blog.
+
+# A couple of tricky parts
+- I'm using the `article_updated` webhook (https://docs.forem.com/api/#operation/createWebhook) to trigger the blog rebuild at Vercel. It has to be created separately.
+- I wanted to have dev.to post slugs instead of numeric ids in URLs. However, the numeric id is required in order to fetch the post content. Passing extra data from `getStaticPaths` to `getStaticProps` is not supported by Next.js now, so in `getStaticPaths` I had to save the list of all posts in the file, and retrieve the id by slug in `getStaticProps`. Not the most elegant solution, but it's better than nothing! Credits for this idea: [James Wallis](https://wallis.dev/blog/adding-a-devto-powered-blog-to-a-nextjs-website).
