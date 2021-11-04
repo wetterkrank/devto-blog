@@ -29,6 +29,7 @@ export async function getAllPostIds() {
 export async function getPostData(slug: string) {
   // Read cache, parse to object and find the post metadata by slug
   const cacheContents = fs.readFileSync(path.join(process.cwd(), cacheFile), 'utf-8');
+  console.log(cacheContents);
   const cache: PostData[] = JSON.parse(cacheContents);
   const meta = cache.find((cachedData: PostData) => cachedData.slug === slug) as PostData;
 
