@@ -1,25 +1,24 @@
-import { GetStaticProps } from 'next'
+import { GetStaticProps } from 'next';
 
-import Head from 'next/head'
-import Layout, { siteTitle } from '../components/layout'
-import Link from 'next/link'
-import Date from '../components/date'
-import { getSortedPostsData } from '../lib/posts'
+import Head from 'next/head';
+import Layout, { siteTitle } from '../components/layout';
+import Link from 'next/link';
+import Date from '../components/date';
+import { getSortedPostsData } from '../lib/posts';
 
-import utilStyles from '../styles/utils.module.css'
+import utilStyles from '../styles/utils.module.css';
+import { IPostMeta } from '../interfaces/post';
 
-
-
-export const getStaticProps: GetStaticProps = async context => {
-  const allPostsData = await getSortedPostsData()
+export const getStaticProps: GetStaticProps = async (context) => {
+  const allPostsList = await getSortedPostsData();
   return {
     props: {
-      allPostsData
-    }
-  }
-}
+      allPostsList,
+    },
+  };
+};
 
-export default function Home({ allPostsData }) {
+export default function Home({ allPostsList }: { allPostsList: IPostMeta[] }) {
   return (
     <Layout home>
       <Head>
@@ -35,7 +34,7 @@ export default function Home({ allPostsData }) {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Posts</h2>
         <ul className={utilStyles.list}>
-          {allPostsData.map(({ slug, date, title }) => (
+          {allPostsList.map(({ slug, date, title }) => (
             <li className={utilStyles.listItem} key={slug}>
               <Link href={`/posts/${slug}`}>
                 <a>{title}</a>
@@ -47,7 +46,7 @@ export default function Home({ allPostsData }) {
             </li>
           ))}
         </ul>
-      </section>      
+      </section>
     </Layout>
-  )
+  );
 }
