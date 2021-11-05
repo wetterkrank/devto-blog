@@ -1,11 +1,11 @@
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
+import rehypeSanitize from 'rehype-sanitize';
 import rehypeStringify from 'rehype-stringify';
 import rehypeHighlight from 'rehype-highlight';
 import basic from 'highlight.js/lib/languages/basic';
 import matter from 'gray-matter';
-import strip from 'strip-comments';
 
 const baseUrl = `https://dev.to`;
 const apiUrl = 'https://dev.to/api/articles';
@@ -47,9 +47,10 @@ const convertMarkdownToHtml = (markdown: string) => {
   const html = unified()
     .use(remarkParse)
     .use(remarkRehype)
+    .use(rehypeSanitize)
     .use(rehypeStringify)
     .use(rehypeHighlight, { languages: extraLanguages })
-    .processSync(strip(content));
+    .processSync(content);
   return String(html);
 };
 
