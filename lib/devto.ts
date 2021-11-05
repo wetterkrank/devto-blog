@@ -3,6 +3,7 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import rehypeHighlight from 'rehype-highlight';
+import basic from 'highlight.js/lib/languages/basic.js';
 import matter from 'gray-matter';
 import strip from 'strip-comments';
 
@@ -41,12 +42,13 @@ const sanitizeDevToMarkdown = (markdown: string) => {
 };
 
 const convertMarkdownToHtml = (markdown: string) => {
+  const extraLanguages = { basic: basic };
   const { content } = matter(markdown);
   const html = unified()
     .use(remarkParse)
     .use(remarkRehype)
     .use(rehypeStringify)
-    .use(rehypeHighlight)
+    .use(rehypeHighlight, { languages: extraLanguages })
     .processSync(strip(content));
   return String(html);
 };
