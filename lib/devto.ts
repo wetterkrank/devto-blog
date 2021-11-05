@@ -3,7 +3,7 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import rehypeHighlight from 'rehype-highlight';
-import basic from 'highlight.js/lib/languages/basic.js';
+import basic from 'highlight.js/lib/languages/basic';
 import matter from 'gray-matter';
 import strip from 'strip-comments';
 
