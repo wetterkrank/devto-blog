@@ -37,7 +37,7 @@ export default function Home({ allPostsList }: { allPostsList: IPostMeta[] }) {
           {allPostsList.map(({ slug, date, title }) => (
             <li className={utilStyles.listItem} key={slug}>
               <Link href={`/posts/${slug}`}>
-                <a>{title}</a>
+                {title}
               </Link>
               <br />
               <small className={utilStyles.lightText}>
