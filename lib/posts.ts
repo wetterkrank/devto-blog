@@ -3,7 +3,6 @@ import path from 'path';
 
 import { getPostsList, getPostContent, getPostUrl } from './devto';
 import { IPostMeta, IPostData } from '../interfaces/post';
-import { delay } from './utilities';
 
 const cacheFile = '.posts-meta-cache.json';
 
@@ -34,7 +33,6 @@ export async function getPostData(slug: string): Promise<IPostData> {
   const meta = cache.find((cachedData: IPostMeta) => cachedData.slug === slug) as IPostMeta;
 
   // Query post content by id
-  await delay(1000);
   const contentHtml = await getPostContent(meta.id);
   const originalUrl = getPostUrl(meta.slug);
 
