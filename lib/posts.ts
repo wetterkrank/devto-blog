@@ -41,6 +41,7 @@ export async function getPostData(slug: string): Promise<IPostData> {
     slug: meta.slug,
     date: meta.date,
     title: meta.title,
+    tagList: meta.tagList,
     contentHtml: contentHtml,
     originalUrl: originalUrl,
   };

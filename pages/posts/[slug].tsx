@@ -4,11 +4,12 @@ import Layout from '../../components/layout';
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import Head from 'next/head';
 import Date from '../../components/date';
+import Tags from '../../components/tags';
 
 import utilStyles from '../../styles/utils.module.css';
 import { IPostData } from '../../interfaces/post';
 
-// Runs only on the server-side
+// Runs only server-side
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!params) return { props: {} };
 
@@ -20,7 +21,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-// Runs only on the server-side
+// Runs only server-side
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getAllPostIds();
   return {
@@ -39,6 +40,9 @@ export default function Post({ postData }: { postData: IPostData }) {
         <h1 className={utilStyles.headingXl}>{postData.title}</h1>
         <div className={utilStyles.lightText}>
           <Date dateString={postData.date} />
+        </div>
+        <div>
+          <Tags tagList={postData.tagList} />
         </div>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
         <hr />

@@ -3,6 +3,7 @@ export interface IPostMeta {
   slug: string;
   date: string;
   title: string;
+  tagList: string[];
 }
 
 export interface IPostData {
@@ -10,6 +11,7 @@ export interface IPostData {
   slug: string;
   date: string;
   title: string;
+  tagList: string[];
   contentHtml: string;
   originalUrl: string;
 }

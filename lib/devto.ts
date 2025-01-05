@@ -17,14 +17,21 @@ export const getPostsList = async () => {
     slug: string;
     created_at: string;
     title: string;
+    tag_list: string[];
   };
-  const res = await fetch(`${apiUrl}?username=${username}`);
+  const res = await fetch(`${apiUrl}?username=${username}`, {
+    headers: {
+      Accept: 'application/vnd.forem.api-v1+json',
+    },
+  });
   const data: DevToPostMeta[] = await res.json();
+  console.log(data);
   return Object.values(data).map((item: DevToPostMeta) => ({
     id: item.id,
     slug: item.slug,
     date: item.created_at,
     title: item.title,
+    tagList: item.tag_list,
     contentHtml: '',
   }));
 };
@@ -55,7 +62,11 @@ const convertMarkdownToHtml = (markdown: string) => {
 };
 
 export const getPostContent = async (id: number) => {
-  const res = await fetch(`${apiUrl}/${id}`);
+  const res = await fetch(`${apiUrl}/${id}`, {
+    headers: {
+      Accept: 'application/vnd.forem.api-v1+json',
+    },
+  });
   const article = await res.json();
   const markdown = sanitizeDevToMarkdown(article.body_markdown);
   const contentHtml = convertMarkdownToHtml(markdown);

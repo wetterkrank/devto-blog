@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
 import Link from 'next/link';
 import Date from '../components/date';
+import Tags from '../components/tags';
 import { getSortedPostsData } from '../lib/posts';
 
 import utilStyles from '../styles/utils.module.css';
@@ -34,15 +35,16 @@ export default function Home({ allPostsList }: { allPostsList: IPostMeta[] }) {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Posts</h2>
         <ul className={utilStyles.list}>
-          {allPostsList.map(({ slug, date, title }) => (
+          {allPostsList.map(({ slug, date, title, tagList }) => (
             <li className={utilStyles.listItem} key={slug}>
-              <Link href={`/posts/${slug}`}>
-                {title}
-              </Link>
+              <Link href={`/posts/${slug}`}>{title}</Link>
               <br />
               <small className={utilStyles.lightText}>
                 <Date dateString={date} />
               </small>
+              <div>
+                <Tags tagList={tagList} />
+              </div>
             </li>
           ))}
         </ul>
